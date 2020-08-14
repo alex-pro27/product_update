@@ -1,0 +1,41 @@
+version: '3.2'
+
+database:
+  db: tmall
+  host: localhost
+  port: 27017
+  username: tmalldb
+  password: SomePassword
+
+system:
+  daemon_log_path: /var/log/rabbitmq-daemon.log
+  tmall_log_path: /var/log/logs/tmall_get_products.log
+
+services:
+  tmall:
+    login: tmall
+    password: SimplePassword
+    queue: tmall
+    handler: tmall.TmallService
+
+  pim:
+    login: pim
+    password: SimplePassword
+    queue: pim
+    handler: pim.PIMService
+
+server:
+  addr: exchange.addr.com
+  port: 5672
+  path: /
+  username: AwesomeUser
+  password: SimplePassword
+
+tmall_auth:
+  'EXAMPLE':
+    'email': 'exampler@aliexpress-op.ru'
+    'password': 'password'
+    'token': 'token'
+
+  share_data:
+    goods: http://ftp.some.addr/ftp/shere/goods.xml
